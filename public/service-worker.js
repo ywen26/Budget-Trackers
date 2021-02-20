@@ -14,7 +14,7 @@ const FILES_TO_CACHE = [
 // install
 self.addEventListener("install", function (event) {
   event.waitUntil(
-    caches.open(DATA_CACHE_BUDGET).then((cache) => cache.add("/api/budget"))
+    caches.open(DATA_CACHE_BUDGET).then((cache) => cache.add("/api/transaction"))
   );
     
   event.waitUntil(
