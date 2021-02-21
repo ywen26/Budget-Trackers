@@ -4,7 +4,7 @@ const FILES_TO_CACHE = [
   "/",
   "/index.html",
   "/manifest.webmanifest",
-  "/style.css",
+  "/styles.css",
   "/index.js",
   "/db.js",
   "/assets/images/icons/icon-192x192.png",
@@ -66,7 +66,7 @@ self.addEventListener("fetch", function(event) {
 
   event.respondWith(
     caches.open(CACHE_BUDGET).then(cache => {
-      return cache.match(evt.request).then(response => {
+      return cache.match(event.request).then(response => {
         return response || fetch(event.request);
       });
     })
