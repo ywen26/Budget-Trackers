@@ -2,13 +2,13 @@ let db;
 // create a new db request for a "budget" database.
 const request = indexedDB.open("budget", 1);
 
-request.onupgradeneeded = function(event) {
+request.onupgradeneeded = (event) => {
    // create object store called "pending" and set autoIncrement to true
   const db = event.target.result;
   db.createObjectStore("pending", { autoIncrement: true });
 };
 
-request.onsuccess = function(event) {
+request.onsuccess = (event) => {
   db = event.target.result;
 
   // check if app is online before reading from db
@@ -17,8 +17,8 @@ request.onsuccess = function(event) {
   }
 };
 
-request.onerror = function(event) {
-  console.log("Woops! " + event.target.errorCode);
+request.onerror = (event) => {
+  console.log("Error: " + event.target.errorCode);
 };
 
 function saveRecord(record) {
@@ -40,7 +40,7 @@ function checkDatabase() {
   // get all records from store and set to a variable
   const getAll = store.getAll();
 
-  getAll.onsuccess = function() {
+  getAll.onsuccess = () => {
     if (getAll.result.length > 0) {
       fetch("/api/transaction/bulk", {
         method: "POST",

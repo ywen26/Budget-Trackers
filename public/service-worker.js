@@ -12,11 +12,13 @@ const FILES_TO_CACHE = [
 ];
 
 // install
-self.addEventListener("install", async function (event) {
+self.addEventListener("install", function(event) {
+  // pre cache budget data
   event.waitUntil(
     caches.open(DATA_CACHE_BUDGET).then((cache) => cache.add("/api/transaction"))
   );
     
+  // pre cache all static assets
   event.waitUntil(
     caches.open(CACHE_BUDGET).then((cache) => cache.addAll(FILES_TO_CACHE))
   );
@@ -43,12 +45,13 @@ self.addEventListener("activate", function(event) {
 });
 
 // fetch
-self.addEventListener("fetch", async function(event) {
+self.addEventListener("fetch", function(event) {
   if (event.request.url.includes("/api/")) {
     event.respondWith(
       caches.open(DATA_CACHE_BUDGET).then(cache => {
         return fetch(event.request)
           .then(response => {
+            // If the response was good, clone it and store it in the cache
             if (response.status === 200) {
               cache.put(event.request.url, response.clone());
             }
@@ -56,6 +59,7 @@ self.addEventListener("fetch", async function(event) {
             return response;
           })
           .catch(error => {
+            // Network request failed, try to get it from the cache
             return cache.match(event.request);
           });
       }).catch(error => console.log(error))
