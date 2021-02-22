@@ -12,10 +12,10 @@ const FILES_TO_CACHE = [
 ];
 
 // install
-self.addEventListener("install", function (event) {
-//   event.waitUntil(
-//     caches.open(DATA_CACHE_BUDGET).then((cache) => cache.add("/api/transaction"))
-//   );
+self.addEventListener("install", async function (event) {
+  event.waitUntil(
+    caches.open(DATA_CACHE_BUDGET).then((cache) => cache.add("/api/transaction"))
+  );
     
   event.waitUntil(
     caches.open(CACHE_BUDGET).then((cache) => cache.addAll(FILES_TO_CACHE))
@@ -43,7 +43,7 @@ self.addEventListener("activate", function(event) {
 });
 
 // fetch
-self.addEventListener("fetch", function(event) {
+self.addEventListener("fetch", async function(event) {
   if (event.request.url.includes("/api/")) {
     event.respondWith(
       caches.open(DATA_CACHE_BUDGET).then(cache => {
