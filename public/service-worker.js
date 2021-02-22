@@ -1,10 +1,12 @@
-const CACHE_BUDGET = "static-cache-v2";
+const CACHE_BUDGET = "static-cache-v1";
 const DATA_CACHE_BUDGET = "data-cache-v1";
 const FILES_TO_CACHE = [
   "/",
   "/index.html",
   "/manifest.webmanifest",
   "/styles.css",
+  "/index.js",
+  "/db.js",
   "/icons/icon-192x192.png",
   "/icons/icon-512x512.png"
 ];
