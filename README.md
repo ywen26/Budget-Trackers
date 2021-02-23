@@ -23,6 +23,13 @@ THEN that will be shown on the page, and added to their transaction history when
 * Morgan - npm
 * Compression -npm
 
+## Appearance and Functionality
+
+Below is the page to display how the tracker works:
+![Demo](./public/assets/images/sc-18.png)
+
+Here is the deployed link of the application: [Budget Tracker](https://morning-brook-54408.herokuapp.com/)
+
 ## URL Sources
 
 Feel free to check the application repository: [https://github.com/ywen26/Budget-Trackers](https://github.com/ywen26/Budget-Trackers)
